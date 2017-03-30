@@ -21,6 +21,7 @@ public class LaserBehavior : MonoBehaviour
     public Vector3 laserStartEuler;
     public Vector3 laserEndEuler;
     public bool isAttacking;
+    public GameProcess gameManager;
     //public int attackPattern;
 
     // Use this for initialization
@@ -29,6 +30,7 @@ public class LaserBehavior : MonoBehaviour
         isAttacking = false;
 
         attackPattern = GetComponentInParent<SelectWeapon>();
+        gameManager = FindObjectOfType<GameProcess>();
 
         if (attackPattern.attackPattern == 0) //Top right
         {
@@ -119,6 +121,7 @@ public class LaserBehavior : MonoBehaviour
                 {
                     print("Ray hits:" + hit.transform.name + ", distance:" + hit.distance);
                     //player get hit
+                    gameManager.score--;
                 }
             }
         }

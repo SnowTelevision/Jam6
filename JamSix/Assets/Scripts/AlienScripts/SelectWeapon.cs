@@ -22,12 +22,21 @@ public class SelectWeapon : MonoBehaviour
 	void Start ()
     {
         weaponType = betterRandom(0, weaponTypes.Length - 1);
+        //weaponType = 2;//Change weaponType to test different weapon types
+        attackPattern = betterRandom(0, 3);
+
         thisWeapon = Instantiate(weaponTypes[weaponType], new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation, transform);
+
+        if(weaponType == 2)
+        {
+            thisWeapon.GetComponent<BombBehavior>().bombPattern = attackPattern % 3;
+            attackPattern = thisWeapon.GetComponent<BombBehavior>().bombPattern;
+        }
+
         Quaternion symbolRotation = new Quaternion();
         symbolRotation.eulerAngles = new Vector3(90, 0, 0);
         weaponSymbol = Instantiate(weaponMarkers[weaponType], new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), symbolRotation, transform);
 
-        attackPattern = betterRandom(0, 3);
         weaponSymbol.color = patternColors[attackPattern];
 
         weaponGenerated = false;

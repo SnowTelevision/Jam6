@@ -48,6 +48,8 @@ public class CollidePlayer : MonoBehaviour
             if (!player.isInvincible)
             {
                 print("Gatlin hit player");
+                gameManager.score--;
+                //gameManager.scoreText.text = gameManager.score.ToString();
             }
         }
     }
